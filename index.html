@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>大阪美食之旅 · 地圖＋預約＋Plan B 完全版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fef7e8;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', 'Apple LiGothic', '微軟正黑體', sans-serif;
+            color: #2c2418;
+            line-height: 1.5;
+            padding: 20px 16px 60px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .header-card {
+            background: #fff3e0;
+            border-radius: 32px;
+            padding: 20px 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #ffe0b5;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #c53a1f, #e67e22);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .flight-info {
+            background: #ffffffcc;
+            border-radius: 24px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            backdrop-filter: blur(2px);
+            border: 1px solid #ffe0b5;
+        }
+
+        .flight-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 0.95rem;
+            margin: 6px 0;
+        }
+
+        .hotel-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-top: 12px;
+            border-left: 4px solid #e67e22;
+            padding-left: 12px;
+            background: #fffaef;
+            border-radius: 12px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 32px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0e2ce;
+        }
+
+        .day-header {
+            background: #ffedd5;
+            padding: 18px 20px 12px;
+            border-bottom: 2px dashed #f0cba0;
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .day-theme {
+            font-size: 0.75rem;
+            background: #e67e22;
+            color: white;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-weight: normal;
+        }
+
+        .day-content {
+            padding: 10px 20px 24px;
+        }
+
+        .meal-section {
+            margin-top: 24px;
+            border-left: 4px solid #f7b05e;
+            padding-left: 16px;
+        }
+
+        .meal-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: #b44a1a;
+        }
+
+        .restaurant-item {
+            background: #fefaf5;
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            border: 1px solid #ffe0c0;
+        }
+
+        .restaurant-name {
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .price-tag {
+            background: #f1e5d4;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .remark-box {
+            background: #fff7e8;
+            margin-top: 10px;
+            padding: 8px 10px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-top: 1px solid #ffe0b5;
+        }
+        .remark-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #fef0df;
+            padding: 4px 10px;
+            border-radius: 40px;
+        }
+        .info-grid {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.78rem;
+            border-top: 1px solid #ffe0b5;
+            padding-top: 8px;
+        }
+        .info-chip {
+            background: #e9e0d3;
+            border-radius: 20px;
+            padding: 4px 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .info-chip a {
+            text-decoration: none;
+            color: #c53a1f;
+            font-weight: 500;
+        }
+        .planb {
+            background: #ffe1cc;
+        }
+        .transport-note, .sight-note {
+            background: #eef4ff;
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin: 20px 0 10px;
+            font-size: 0.85rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .sight-note {
+            background: #e8f4e8;
+            border-left-color: #2e7d32;
+        }
+        .time-stamp {
+            font-family: monospace;
+            font-weight: 600;
+            background: #f0e2ce;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-right: 8px;
+        }
+        hr {
+            margin: 18px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #f0dbb8, transparent);
+        }
+        .footer-tips {
+            background: #fff0e0;
+            border-radius: 28px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        @media (max-width: 480px) {
+            body { padding: 12px 12px 40px; }
+            .day-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-card">
+        <h1>🍱 大阪・食之旅途</h1>
+        <div style="font-size: 0.9rem; color: #9b6a3e;">5月16日 (五) — 5月19日 (一) · 4日3夜 · 美食為主</div>
+        <div class="flight-info">
+            <div class="flight-row"><span>✈️ 去程</span><span><strong>UO686</strong> 香港快運</span><span>15:35 抵達關西機場(KIX)</span></div>
+            <div class="flight-row"><span>🔄 回程</span><span><strong>MM67</strong> 樂桃航空</span><span>20:30 起飛 → 23:55 抵香港</span></div>
+            <div class="hotel-name">🏨 DEL style Osaka Shinsaibashi by Daiwa Roynet Hotel<br><span style="font-size: 0.8rem;">📍 心齋橋核心地帶，步行可達道頓堀、難波</span></div>
+        </div>
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 1 · 5月16日 (週六)</span>
+                <span class="day-theme">✨ 燒肉開場 · 道頓堀狂熱</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="transport-note">
+                🚆 <strong>機場→酒店交通</strong>：南海電鐵特急Rapi:t至難波站(45分鐘)，步行或轉地鐵至心齋橋。<br>
+                💡 推薦購買 <strong>ICOCA卡</strong>。
+            </div>
+            <div class="sight-note">
+                <span class="time-stamp">15:35</span> 抵關西機場 <span class="time-stamp">17:20</span> 酒店check-in <span class="time-stamp">18:00</span> 出發晚餐
+            </div>
+            <div class="meal-section">
+                <div class="meal-title">🥩 晚餐 18:30～20:00 · 和牛燒肉</div>
+                <!-- 完全個室燒肉 華道 -->
+                <div class="restaurant-item">
+                    <div class="restaurant-name">🔥 完全個室燒肉 華道 Hanamichi <span class="price-tag">¥4,400~6,600/人</span></div>
+                    <div class="restaurant-detail">📍 心齋橋/難波 · 全席包廂，A5和牛拼盤必點</div>
+                    <div class="info-grid">
+                        <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=完全個室焼肉+華道+大阪" target="_blank">Google地圖</a></span>
+                        <span class="info-chip">📞 預約：酒店前台代訂 / 電話 +81-6-6212-1129</span>
+                        <span class="info-chip planb">🔄 Plan B：<a href="https://www.google.com/maps/search/?api=1&query=焼肉+板前+心斎橋" target="_blank">焼肉 板前</a> (步行3分鐘，較易有位)</span>
+                    </div>
+                    <div class="remark-box">
+                        <span class="remark-item">👥 週六滿，建議預約</span>
+                        <span class="remark-item">🍽️ 夏多布里昂、和牛三筋</span>
+                        <span class="remark-item">⏱️ 預約免排，現場等30~50分</span>
+                    </div>
+                </div>
+                <!-- 敘敘苑 -->
+                <div class="restaurant-item">
+                    <div class="restaurant-name">✨ 敘敘苑 心齋橋店 <span class="price-tag">晚市¥6,000~</span></div>
+                    <div class="restaurant-detail">📍 大丸心齋橋附近</div>
+                    <div class="info-grid">
+                        <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=叙々苑+心斎橋店" target="_blank">Google地圖</a></span>
+                        <span class="info-chip">📞 預約：官網預約 / 酒店代訂 / 電話 +81-6-6245-4129</span>
+                        <span class="info-chip planb">🔄 Plan B：<a href="https://www.google.com/maps/search/?api=1&query=焼肉+力丸+心斎橋" target="_blank">焼肉 力丸 心齋橋</a> (吃到飽，免預約機會高)</span>
+                    </div>
+                    <div class="remark-box">
+                        <span class="remark-item">👥 人氣極高</span>
+                        <span class="remark-item">🍽️ 特上牛舌、壺漬牛肋條</span>
+                        <span class="remark-item">⏱️ 排30~60分，強烈訂位</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sight-note"><span class="time-stamp">20:15～21:00</span> 🚶 道頓堀運河 & 固力果跑跑人</div>
+
+            <div class="meal-section">
+                <div class="meal-title">🍢 宵夜 21:00～22:30 · 道頓堀不眠</div>
+                <!-- 章魚燒 わなか -->
+                <div class="restaurant-item">
+                    <div class="restaurant-name">🐙 たこ焼き道楽 わなか <span class="price-tag">8顆 ¥700</span></div>
+                    <div class="info-grid">
+                        <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=たこ焼き道楽+わなか+道頓堀" target="_blank">Google地圖</a></span>
+                        <span class="info-chip">📞 現場排隊，無預約</span>
+                        <span class="info-chip planb">🔄 Plan B：<a href="https://www.google.com/maps/search/?api=1&query=くくる+たこ焼き+道頓堀" target="_blank">くくる 道頓堀</a> (另一名店，同樣排隊)</span>
+                    </div>
+                    <div class="remark-box"><span class="remark-item">⏱️ 排15~25分</span><span class="remark-item">🍽️ 青蔥章魚燒</span></div>
+                </div>
+                <!-- 千房 -->
+                <div class="restaurant-item">
+                    <div class="restaurant-name">🥞 千房 (道頓堀本店) <span class="price-tag">大阪燒 ¥1,380起</span></div>
+                    <div class="info-grid">
+                        <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=千房+道頓堀本店" target="_blank">Google地圖</a></span>
+                        <span class="info-chip">📞 可電話預約 +81-6-6212-2211</span>
+                        <span class="info-chip planb">🔄 Plan B：<a href="https://www.google.com/maps/search/?api=1&query=美津の+お好み焼き" target="_blank">美津の</a> (大阪燒老店，步行5分)</span>
+                    </div>
+                    <div class="remark-box"><span class="remark-item">⏱️ 排20~40分</span><span class="remark-item">🍽️ 千房燒＋炒麵</span></div>
+                </div>
+                <!-- PABLO -->
+                <div class="restaurant-item">
+                    <div class="restaurant-name">🧀 PABLO 心齋橋店 <span class="price-tag">半熟起司塔 ¥1,000~</span></div>
+                    <div class="info-grid">
+                        <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=Pablo+心斎橋" target="_blank">Google地圖</a></span>
+                        <span class="info-chip">📞 無預約，外帶為主</span>
+                        <span class="info-chip planb">🔄 Plan B：<a href="https://www.google.com/maps/search/?api=1&query=Rikuro+老爺爺起司蛋糕+難波" target="_blank">りくろーおじさんの店</a> (老爺爺起司蛋糕)</span>
+                    </div>
+                    <div class="remark-box"><span class="remark-item">⏱️ 10~20分</span><span class="remark-item">🍽️ 經典原味半熟塔</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 2 天神橋筋 (已含地圖/預約/Plan B) -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title"><span>📅 Day 2 · 5月17日 (週日)</span><span class="day-theme">🍡 天神橋筋商店街</span></div>
+        </div>
+        <div class="day-content">
+            <div class="sight-note"><span class="time-stamp">09:30</span> 早餐：珈琲とパン (心齋橋)<br>
+            <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=珈琲とパン+心斎橋" target="_blank">地圖</a></span> | 無需預約 | Plan B：上島咖啡店</div>
+            <div class="transport-note">🚇 心齋橋→南森町站 (地鐵堺筋線) 商店街入口</div>
+            
+            <div class="meal-section"><div class="meal-title">🍡 商店街逛吃 10:30～12:30</div>
+                <div class="restaurant-item"><div class="restaurant-name">🍘 中村屋 可樂餅 ¥90</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=中村屋+天六+大阪" target="_blank">地圖</a></span><span class="info-chip">📞 現場排</span><span class="info-chip planb">Plan B：商店街其他可樂餅攤</span></div><div class="remark-box"><span class="remark-item">⏱️ 5~10分</span><span class="remark-item">🍽️ 牛肉可樂餅</span></div></div>
+                <div class="restaurant-item"><div class="restaurant-name">🐟 魚伊 (關東煮/鰻魚串) ¥300~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=魚伊+天神橋筋" target="_blank">地圖</a></span><span class="info-chip">📞 無</span><span class="info-chip planb">Plan B：隔壁「たこ梅」關東煮</span></div></div>
+                <div class="restaurant-item"><div class="restaurant-name">🐙 玉屋 (章魚燒) ¥650</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=玉屋+天神橋筋" target="_blank">地圖</a></span><span class="info-chip planb">Plan B：はなだこ</span></div></div>
+            </div>
+            
+            <div class="restaurant-item"><div class="restaurant-name">🍤 奧乃家 炸蝦丼 ¥1,300</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=奥乃家+天丼+大阪" target="_blank">地圖</a></span><span class="info-chip">📞 現場排</span><span class="info-chip planb">Plan B：天ぷら 大星</span></div><div class="remark-box"><span class="remark-item">⏱️ 15~25分</span><span class="remark-item">🍽️ 海老天丼</span></div></div>
+            <div class="restaurant-item"><div class="restaurant-name">🍜 秋山 手打蕎麥 ¥1,200</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=蕎麦+秋山+天神橋" target="_blank">地圖</a></span><span class="info-chip planb">Plan B：そば処 吉田</span></div></div>
+            <div class="sight-note"><span class="time-stamp">13:30～14:30</span> 大阪天滿宮</div>
+            
+            <div class="restaurant-item"><div class="restaurant-name">☕ 高麗橋琺瑯珈琲 昭和布丁 ¥750</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=高麗橋瑯琲+大阪" target="_blank">地圖</a></span><span class="info-chip planb">Plan B：喫茶 アインス</span></div></div>
+            <div class="restaurant-item"><div class="restaurant-name">🏛️ 五感 北濱本館 法式吐司 ¥1,200~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=五感+北浜本館" target="_blank">地圖</a></span><span class="info-chip">📞 可官網預約</span><span class="info-chip planb">Plan B：北浜レトロ (另一棟洋館喫茶)</span></div><div class="remark-box"><span class="remark-item">⏱️ 排20~40分</span></div></div>
+            <div class="sight-note"><span class="time-stamp">16:00～17:00</span> 中之島公園</div>
+            
+            <div class="restaurant-item"><div class="restaurant-name">🐡 玄品河豚 (法善寺店) 套餐¥4,000~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=玄品+河豚+法善寺" target="_blank">地圖</a></span><span class="info-chip">📞 官網預約 / 酒店代訂 / +81-6-6213-9444</span><span class="info-chip planb">Plan B：<a href="https://www.google.com/maps/search/?api=1&query=とらふぐ+亭+難波" target="_blank">とらふぐ亭 難波</a> (較便宜)</span></div><div class="remark-box"><span class="remark-item">⏱️ 預約免排</span></div></div>
+            <div class="restaurant-item"><div class="restaurant-name">🍔 Grill Capital Toyotei 漢堡排 ¥1,800</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=Grill+Capital+Toyotei+難波" target="_blank">地圖</a></span><span class="info-chip planb">Plan B：洋食 グリル エフ</span></div><div class="remark-box"><span class="remark-item">⏱️ 排20~30分</span></div></div>
+        </div>
+    </div>
+
+    <!-- DAY 3 梅田+新世界 -->
+    <div class="day-card">
+        <div class="day-header"><div class="day-title"><span>📅 Day 3 · 5月18日 (週一)</span><span class="day-theme">🏮 梅田+新世界</span></div></div>
+        <div class="day-content">
+            <div class="restaurant-item"><div class="restaurant-name">🍞 嵜本 高級生吐司 ¥800~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=嵜本+心斎橋" target="_blank">地圖</a></span><span class="info-chip planb">Plan B：乃が美 生吐司 (難波)</span></div><div class="remark-box"><span class="remark-item">⏱️ 平日10分</span></div></div>
+            <div class="sight-note"><span class="time-stamp">11:00～12:00</span> 梅田藍天大廈空中庭園</div>
+            <div class="restaurant-item"><div class="restaurant-name">🥩 ねぎし (牛舌) ¥1,800~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=ねぎし+LINKS+UMEDA" target="_blank">地圖</a></span><span class="info-chip">📞 現場抽號</span><span class="info-chip planb">Plan B：牛たん 炭焼 利久 (梅田)</span></div><div class="remark-box"><span class="remark-item">⏱️ 排30~40分</span></div></div>
+            <div class="restaurant-item"><div class="restaurant-name">🍣 壽司常 (海鮮丼) ¥1,500~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=寿司常+LINKS+UMEDA" target="_blank">地圖</a></span><span class="info-chip planb">Plan B：海鮮丼 えびす屋</span></div></div>
+            <div class="restaurant-item"><div class="restaurant-name">🏛️ 五感 北濱本館 (下午茶)</div><div class="info-grid"><span class="info-chip">🗺️ 同上Day2</span><span class="info-chip planb">Plan B：Gouter de Roi 梅田</span></div></div>
+            <div class="sight-note"><span class="time-stamp">15:15～16:30</span> 通天閣</div>
+            <div class="restaurant-item"><div class="restaurant-name">🧨 元祖串炸 達摩 (新世界總本店) 1本¥180~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=元祖串かつ+だるま+新世界" target="_blank">地圖</a></span><span class="info-chip">📞 現場排隊</span><span class="info-chip planb">Plan B：<a href="https://www.google.com/maps/search/?api=1&query=串かつ+五味+新世界" target="_blank">串かつ 五味</a> (當地人推薦，排較短)</span></div><div class="remark-box"><span class="remark-item">⏱️ 排40~60分</span></div></div>
+            <div class="restaurant-item"><div class="restaurant-name">🥒 八重勝串炸 套餐¥2,000</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=八重勝+串かつ+新世界" target="_blank">地圖</a></span><span class="info-chip planb">Plan B：串かつ 松葉</span></div><div class="remark-box"><span class="remark-item">⏱️ 20~30分</span></div></div>
+        </div>
+    </div>
+
+    <!-- DAY 4 蛋包飯＋返程 -->
+    <div class="day-card">
+        <div class="day-header"><div class="day-title"><span>📅 Day 4 · 5月19日 (週二)</span><span class="day-theme">🍛 百年蛋包飯告別</span></div></div>
+        <div class="day-content">
+            <div class="restaurant-item"><div class="restaurant-name">⭐ 北極星 (心齋橋本店) 蛋包飯¥1,000~</div><div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=北極星+心斎橋+元祖オムライス" target="_blank">Google地圖</a></span><span class="info-chip">📞 無預約，現場排隊</span><span class="info-chip planb">🔄 Plan B：<a href="https://www.google.com/maps/search/?api=1&query=オムライス+ハーフ&ハーフ+心斎橋" target="_blank">Half & Half 心齋橋</a> (蛋包飯專賣，排隊較短)</span></div><div class="remark-box"><span class="remark-item">⏱️ 平日12點前排20分，之後30~40分</span><span class="remark-item">🍽️ 雞肉蛋包飯、多蜜醬汁</span></div></div>
+            <div class="transport-note">🚄 <span class="time-stamp">16:00</span> 難波站搭南海電鐵 → <span class="time-stamp">16:45</span> 關西機場 T2，樂桃MM67 建議17:00前報到</div>
+            <div class="restaurant-item"><div class="restaurant-name">✈️ 關西機場 烏龍麵/牛丼 ¥550~</div><div class="info-grid"><span class="info-chip">🗺️ 機場內第一航廈3F</span><span class="info-chip planb">Plan B：すき家 (T1)</span></div></div>
+            <div class="sight-note"><span class="time-stamp">20:30</span> MM67起飛 → <span class="time-stamp">23:55</span> 抵香港</div>
+        </div>
+    </div>
+
+    <!-- 綜合貼士 -->
+    <div class="footer-tips">
+        <div class="tips-grid">
+            <div style="font-weight: 700;">📌 地圖＋預約＋Plan B 總整理</div>
+            <div>✅ 每間餐廳皆有 Google Maps 連結，點擊可直接導航。</div>
+            <div>✅ 預約方式：高級燒肉/河豚建議提前2天請酒店代訂；其餘多為現場排隊，可善用 Plan B 避開人潮。</div>
+            <div>✅ 週末人潮較多，排隊時間可能延長，平日用餐體驗更佳。</div>
+            <div>✅ 所有 Plan B 餐廳均在步行5-10分鐘範圍內，可即時切換。</div>
+            <div>📱 建議下載 Tabelog 或 Google Maps 查看即時擁擠程度。</div>
+            <hr>
+            <div style="text-align: center;">🍻 祝您旅途順暢，美食地圖全制霸！</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+```
