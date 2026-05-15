@@ -1,0 +1,484 @@
+以下是您需要的 **大阪免费景点行程网页（繁体中文版）**，可直接用浏览器打开使用。行程包含每日时间安排、免费景点、平实用餐建议及交通方式，所有内容均已整合为完整HTML文件。
+```html
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>大阪・無料景點漫遊｜零門票深度行程｜繁體中文版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf8f0;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', 'Apple LiGothic', '微軟正黑體', sans-serif;
+            color: #2c2b26;
+            line-height: 1.5;
+            padding: 20px 16px 60px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .header-card {
+            background: linear-gradient(135deg, #e1e5d6, #cdd5bc);
+            border-radius: 32px;
+            padding: 20px 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3a5e3a;
+            margin-bottom: 8px;
+        }
+
+        .sub {
+            font-size: 0.9rem;
+            color: #5b6e4a;
+            margin-bottom: 12px;
+        }
+
+        .flight-info {
+            background: #ffffffcc;
+            border-radius: 24px;
+            padding: 14px 18px;
+            backdrop-filter: blur(2px);
+        }
+
+        .flight-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.9rem;
+            margin: 6px 0;
+        }
+
+        .hotel-name {
+            font-weight: 700;
+            margin-top: 12px;
+            border-left: 4px solid #3a5e3a;
+            padding-left: 12px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 32px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            border: 1px solid #dfe3d0;
+        }
+
+        .day-header {
+            background: #e7ecdc;
+            padding: 18px 20px 12px;
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .day-theme {
+            font-size: 0.75rem;
+            background: #4a6e3a;
+            color: white;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-weight: normal;
+        }
+
+        .day-content {
+            padding: 10px 20px 24px;
+        }
+
+        .time-block {
+            margin: 18px 0 12px;
+            background: #f9faf4;
+            border-radius: 20px;
+            padding: 12px 16px;
+            border-left: 4px solid #8aaa6e;
+        }
+
+        .meal-block {
+            background: #fff6e5;
+            border-left-color: #d9a13b;
+        }
+
+        .time-stamp {
+            font-family: monospace;
+            font-weight: 700;
+            background: #e0e5d5;
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 24px;
+            font-size: 0.75rem;
+            margin-right: 10px;
+        }
+
+        .spot-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin: 8px 0 4px;
+            color: #3a5e3a;
+        }
+
+        .spot-detail {
+            font-size: 0.85rem;
+            color: #54564c;
+            margin: 4px 0;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0 6px;
+        }
+
+        .info-chip {
+            background: #eef0e8;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-chip a {
+            text-decoration: none;
+            color: #3a5e3a;
+            font-weight: 500;
+        }
+
+        .meal-chip {
+            background: #faeecd;
+        }
+
+        .warning-box {
+            background: #fef5e0;
+            border-left: 4px solid #d9a13b;
+            border-radius: 16px;
+            padding: 10px 14px;
+            margin: 12px 0;
+            font-size: 0.8rem;
+        }
+
+        hr {
+            margin: 18px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #dfe3d0, transparent);
+        }
+
+        .footer-tips {
+            background: #e7ecdc;
+            border-radius: 28px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .tips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 12px 12px 40px; }
+            .day-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-card">
+        <h1>🏯 大阪・無料漫遊</h1>
+        <div class="sub">零門票景點｜在地人散步路線｜平實食堂穿插</div>
+        <div class="flight-info">
+            <div class="flight-row"><span>✈️ 去程</span><span><strong>UO686</strong> 香港快運</span><span>15:35 抵關西機場(KIX)</span></div>
+            <div class="flight-row"><span>🔄 回程</span><span><strong>MM67</strong> 樂桃航空</span><span>20:30 起飛 → 23:55 抵香港</span></div>
+            <div class="hotel-name">🏨 DEL style Osaka Shinsaibashi by Daiwa Roynet Hotel<br>📍 心齋橋核心地帶，方便步行</div>
+        </div>
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 1 · 5月16日 (週六)</span>
+                <span class="day-theme">🏯 經典地標＋夜間散步</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block">
+                <span class="time-stamp">15:35</span> 抵達關西機場，辦理入境<br>
+                <span class="time-stamp">16:30</span> 搭乘南海電鐵特急Rapi:t → 難波站（約34分鐘）<br>
+                <span class="time-stamp">17:20</span> 酒店Check-in，輕裝出發
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">18:00〜18:40</span>
+                <div class="spot-name">🍚 晚餐：心齋橋「やよい軒」或「松屋」</div>
+                <div class="spot-detail">平價定食連鎖店，牛丼、炸雞定食約700～900日圓，快速解決不耽誤時間。</div>
+                <div class="info-grid">
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=やよい軒+心斎橋" target="_blank">やよい軒 地圖</a></span>
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=松屋+心斎橋" target="_blank">松屋 地圖</a></span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">19:00〜20:30</span>
+                <div class="spot-name">🏯 大阪城公園（無料）</div>
+                <div class="spot-detail">大阪城公園全域免費開放！夜間點燈後天守閣與護城河倒影極美，本地人也愛在此散步慢跑。不進天守閣完全免費，氣氛寧靜。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=大阪城公園" target="_blank">Google地圖</a></span>
+                    <span class="info-chip">🚇 交通：地鐵谷町線「谷町四丁目站」1B出口步行10分</span>
+                    <span class="info-chip">🎫 門票：公園免費 / 天守閣需購票（可略過）</span>
+                    <span class="info-chip planb">🔄 備案：西之丸庭園（夜間不定期點燈，免費）</span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">20:45〜22:00</span>
+                <div class="spot-name">🌉 道頓堀・心齋橋夜景（無料）</div>
+                <div class="spot-detail">固力果跑跑人、戎橋、法善寺橫丁。感受大阪霓虹招牌與河岸風光，完全免費打卡聖地。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=道頓堀+グリコサイン" target="_blank">地圖</a></span>
+                </div>
+            </div>
+            <div class="warning-box">
+                📌 梅田藍天大廈展望台需門票，本行程改為免費的大阪城公園及道頓堀夜景，省錢又經典。
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 2 文青＋免費展望台 -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 2 · 5月17日 (週日)</span>
+                <span class="day-theme">📚 文青街區＋免費高空展望</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block meal-block">
+                <span class="time-stamp">09:30〜10:00</span>
+                <div class="spot-name">☕ 早餐：上島咖啡店 或 便利店</div>
+                <div class="spot-detail">厚蛋吐司套餐或飯糰牛奶，約500～700日圓。</div>
+                <div class="info-grid">
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=上島珈琲店+心斎橋" target="_blank">上島咖啡地圖</a></span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">10:30〜13:00</span>
+                <div class="spot-name">🚶 中崎町（Nakazakicho）· 昭和老屋散步（無料）</div>
+                <div class="spot-detail">躲開觀光人潮，隱身梅田旁的懷舊街區。百年町屋改建的古著店、雜貨舖、獨立咖啡廳，拍照超有味道。本地年輕人最愛。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=中崎町+大阪" target="_blank">Google地圖</a></span>
+                    <span class="info-chip">🚇 交通：地鐵谷町線「中崎町站」步行1分鐘；或從梅田徒步約10分鐘</span>
+                    <span class="info-chip planb">🔄 備案：空堀商店街（類似風格，人更少）</span>
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">13:00〜14:00</span>
+                <div class="spot-name">🍚 午餐：中崎町「珈琲舎中大路」或梅田「阪急三番街食堂」</div>
+                <div class="spot-detail">老宅咖啡廳三明治套餐（約900日圓），或梅田地下街的定食食堂（700～1000日圓）。</div>
+                <div class="info-grid">
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=珈琲舎+中大路+中崎町" target="_blank">珈琲舎地圖</a></span>
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=阪急三番街+食堂" target="_blank">阪急三番街食堂</a></span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">15:00〜17:00</span>
+                <div class="spot-name">🏙️ 淀屋橋 Sky Terrace（完全無料）</div>
+                <div class="spot-detail">大阪隱藏版免費展望台！位於淀屋橋站直結的「大阪市立東洋陶瓷美術館」上方30樓，露天360度眺望大阪城、中之島、梅田。人潮遠少於梅田藍天，景觀同樣震撼。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=淀屋橋スカイテラス" target="_blank">Google地圖</a></span>
+                    <span class="info-chip">⏰ 開放時間：10:00～23:00（最終入場22:30）</span>
+                    <span class="info-chip">🎫 門票：0日圓！</span>
+                    <span class="info-chip planb">🔄 備案：大阪府咲洲廳舍展望台（週末有時免費，需確認）</span>
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">17:30〜18:30</span>
+                <div class="spot-name">🍚 晚餐：心齋橋「大阪王將」或「なか卯」</div>
+                <div class="spot-detail">餃子定食或親子丼，約700～1000日圓，簡單方便。</div>
+                <div class="info-grid">
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=大阪王将+心斎橋" target="_blank">大阪王將地圖</a></span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">19:30〜21:00</span>
+                <div class="spot-name">✨ 心齋橋筋商店街夜逛</div>
+                <div class="spot-detail">有屋頂的商店街，晚上依然熱鬧，藥妝、雜貨、土產店林立。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 3 懷舊＋寧靜寺院 -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 3 · 5月18日 (週一)</span>
+                <span class="day-theme">🏛️ 古老寺院＋昭和新世界</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block meal-block">
+                <span class="time-stamp">10:00〜10:30</span>
+                <div class="spot-name">☕ 早餐：Doutor / 便利店</div>
+                <div class="spot-detail">簡單咖啡或飯糰。</div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">11:00〜12:30</span>
+                <div class="spot-name">🏛️ 四天王寺（寺院外圍無料散步）</div>
+                <div class="spot-detail">日本最古老官寺（聖德太子創建）。參觀中心伽藍及庭園需門票（300日圓），但廣大寺院外圍、五重塔遠觀、石造鳥居等完全免費。氛圍寧靜莊嚴，可感受千年歷史。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=四天王寺+大阪" target="_blank">Google地圖</a></span>
+                    <span class="info-chip">🚇 交通：地鐵谷町線「四天王寺前夕陽丘站」步行5分鐘</span>
+                    <span class="info-chip">🎫 外圍免費；中心堂300日圓（自由選擇）</span>
+                    <span class="info-chip planb">🔄 備案：一心寺（附近，免費參拜，骨佛有名）</span>
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">12:30〜13:30</span>
+                <div class="spot-name">🍚 午餐：天王寺「かつや」炸豬排定食</div>
+                <div class="spot-detail">連鎖店，炸豬排定食約850～1,100日圓，白飯高麗菜可續。</div>
+                <div class="info-grid">
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=かつや+天王寺" target="_blank">かつや地圖</a></span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">14:30〜16:00</span>
+                <div class="spot-name">🎡 新世界・通天閣（外圍散步無料）</div>
+                <div class="spot-detail">不登塔就不花錢！感受昭和復古街區，巨型招牌、射擊攤、串炸店林立，充滿下町人情味。可免費和比利肯神像合照。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=新世界+通天閣" target="_blank">地圖</a></span>
+                    <span class="info-chip planb">🔄 備案：天王寺公園（2023年翻新開放，部分區域免費）</span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">16:30〜18:00</span>
+                <div class="spot-name">🍶 法善寺橫丁（無料）</div>
+                <div class="spot-detail">道頓堀旁的石板小巷，兩旁老字號餐廳、酒吧，傍晚點燈後極有韻味。可參拜水掛不動尊。</div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">18:30〜19:30</span>
+                <div class="spot-name">🍚 晚餐：難波「牛丼すき家」或「吉野家」</div>
+                <div class="spot-detail">快速平價，約500～800日圓。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 4 住吉大社＋臨空城散步＋返程 -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 4 · 5月19日 (週二)</span>
+                <span class="day-theme">⛩️ 神社參拜＋臨空城</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block">
+                <span class="time-stamp">09:00</span> 退房、寄放行李
+            </div>
+            <div class="time-block meal-block">
+                <span class="time-stamp">09:15〜09:45</span>
+                <div class="spot-name">🍚 早餐：心齋橋「麥當勞」或「Doutor」</div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">10:00〜11:30</span>
+                <div class="spot-name">⛩️ 住吉大社（無料）</div>
+                <div class="spot-detail">全日本住吉神社總本社，獨特的「住吉造」建築，紅色反橋是經典打卡點。境內廣闊，可免費參拜。從難波搭南海電鐵約15分鐘直達。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=住吉大社+大阪" target="_blank">Google地圖</a></span>
+                    <span class="info-chip">🚇 交通：南海本線「住吉大社站」步行3分鐘</span>
+                    <span class="info-chip">🎫 門票：免費（本殿參拜300日圓自由奉獻）</span>
+                    <span class="info-chip planb">🔄 備案：大鳥大社（更寧靜古老）</span>
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">12:00〜13:00</span>
+                <div class="spot-name">🍚 午餐：臨空城Outlet美食街</div>
+                <div class="spot-detail">「Rinku Food Stadium」有章魚燒、烏龍麵、咖哩飯，約800～1,200日圓。</div>
+                <div class="info-grid">
+                    <span class="info-chip meal-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=Rinku+Premium+Outlets+フードコート" target="_blank">美食街地圖</a></span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">13:30〜15:30</span>
+                <div class="spot-name">🛒 臨空城Outlet（免費逛街）</div>
+                <div class="spot-detail">關西機場旁最大Outlet，不購物也可散步看飛機、摩天輪。免費休息區多。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=りんくうプレミアムアウトレット" target="_blank">地圖</a></span>
+                    <span class="info-chip">🎒 行李：車站及Outlet有大型置物櫃</span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">16:30</span> 免費接駁巴士至關西機場T2（約10分鐘）<br>
+                <span class="time-stamp">18:00</span> 辦理登機、託運<br>
+                <span class="time-stamp">20:30</span> MM67起飛返香港 → <span class="time-stamp">23:55</span> 抵達香港
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">17:30〜18:30</span>
+                <div class="spot-name">🍚 機場晚餐：關西機場T2「吉野家」或「たこ昌」</div>
+                <div class="spot-detail">牛丼、章魚燒、烏龍麵，約600～1,000日圓。</div>
+            </div>
+
+            <div class="warning-box">
+                📌 樂桃航空MM67在第二航廈（T2），從T1需轉乘接駁巴士約5-7分鐘，請預留充足時間。建議18:00前抵達T2。
+            </div>
+        </div>
+    </div>
+
+    <!-- 綜合貼士 -->
+    <div class="footer-tips">
+        <div class="tips-grid">
+            <div style="font-weight: 700; font-size: 1.2rem;">📌 免費景點＋省錢小貼士</div>
+            <div>✅ 本行程所有景點「入場費皆為0日圓」（四天王寺中心堂、通天閣登塔等付費選項可自由選擇不進入）。</div>
+            <div>✅ 交通使用ICOCA卡儲值，每日地鐵移動約600～1,000日圓。若當日搭超過3次地鐵，可購買「地鐵一日券」（800日圓）。</div>
+            <div>✅ 餐廳選擇以平價連鎖店及食堂為主，每餐預算抓700～1,100日圓，四天下來餐費約8,000～10,000日圓。</div>
+            <div>✅ 淀屋橋Sky Terrace是隱藏版免費展望台，人少景美，強烈推薦。</div>
+            <div>✅ 中崎町、四天王寺外圍、新世界散步皆無料，拍照悠閒。</div>
+            <div>✅ 若遇雨天：可改逛心齋橋筋商店街、難波地下街、臨空城Outlet室內區。</div>
+            <hr>
+            <div style="text-align: center;">🌸 不用花門票錢，也能深度玩大阪！祝旅途愉快。</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+```
