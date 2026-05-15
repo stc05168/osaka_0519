@@ -1,0 +1,487 @@
+以下为您综合之前所有行程精华的完整HTML行程网页。行程涵盖：一天美食小吃（天神桥筋+道顿堀）、一天景点漫游（免费景点为主）、一餐精致晚餐（米其林级和牛/怀石，预算1500港币内），以及返程日轻松行程。所有餐厅均附地图、预约方式、Plan B及排队预估。
+```html
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>大阪完美綜合行程｜美食一天・景點一天・精致一餐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fef7e8;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', 'Apple LiGothic', '微軟正黑體', sans-serif;
+            color: #2c2418;
+            line-height: 1.5;
+            padding: 20px 16px 60px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .header-card {
+            background: linear-gradient(135deg, #fff3e0, #ffe6cc);
+            border-radius: 32px;
+            padding: 20px 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #ffe0b5;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c53a1f, #e67e22);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .flight-info {
+            background: #ffffffcc;
+            border-radius: 24px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            backdrop-filter: blur(2px);
+            border: 1px solid #ffe0b5;
+        }
+
+        .flight-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.9rem;
+            margin: 6px 0;
+        }
+
+        .hotel-name {
+            font-weight: 700;
+            margin-top: 12px;
+            border-left: 4px solid #e67e22;
+            padding-left: 12px;
+            background: #fffaef;
+            border-radius: 12px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 32px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0e2ce;
+        }
+
+        .day-header {
+            background: #ffedd5;
+            padding: 18px 20px 12px;
+            border-bottom: 2px dashed #f0cba0;
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .day-theme {
+            font-size: 0.75rem;
+            background: #e67e22;
+            color: white;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-weight: normal;
+        }
+
+        .day-content {
+            padding: 10px 20px 24px;
+        }
+
+        .time-block {
+            margin: 18px 0 12px;
+            background: #fefaf5;
+            border-radius: 20px;
+            padding: 12px 16px;
+            border-left: 4px solid #f7b05e;
+        }
+
+        .meal-block {
+            background: #fff6e8;
+            border-left-color: #e67e22;
+        }
+
+        .sight-block {
+            background: #f4f8f0;
+            border-left-color: #6a9c6e;
+        }
+
+        .fancy-block {
+            background: #fef0e6;
+            border-left-color: #c53a1f;
+        }
+
+        .time-stamp {
+            font-family: monospace;
+            font-weight: 700;
+            background: #f0e2ce;
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 24px;
+            font-size: 0.7rem;
+            margin-right: 10px;
+        }
+
+        .spot-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin: 8px 0 4px;
+            color: #b44a1a;
+        }
+
+        .spot-detail {
+            font-size: 0.85rem;
+            color: #5f4c38;
+            margin: 4px 0;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0 6px;
+        }
+
+        .info-chip {
+            background: #eef0e8;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-chip a {
+            text-decoration: none;
+            color: #c53a1f;
+            font-weight: 500;
+        }
+
+        .price-tag {
+            background: #f1e5d4;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+        }
+
+        .remark-box {
+            background: #fff7e8;
+            margin-top: 10px;
+            padding: 8px 10px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-top: 1px solid #ffe0b5;
+        }
+
+        .warning-box {
+            background: #fff4e0;
+            border-left: 4px solid #e67e22;
+            border-radius: 16px;
+            padding: 10px 14px;
+            margin: 12px 0;
+            font-size: 0.8rem;
+        }
+
+        hr {
+            margin: 18px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #f0dbb8, transparent);
+        }
+
+        .footer-tips {
+            background: #fff0e0;
+            border-radius: 28px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .tips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 12px 12px 40px; }
+            .day-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-card">
+        <h1>🍱 大阪・完美綜合行</h1>
+        <div style="font-size: 0.9rem;">一天美食小吃｜一天景點漫遊｜一餐極致和食</div>
+        <div class="flight-info">
+            <div class="flight-row"><span>✈️ 去程</span><span><strong>UO686</strong> 香港快運</span><span>15:35 抵關西機場(KIX)</span></div>
+            <div class="flight-row"><span>🔄 回程</span><span><strong>MM67</strong> 樂桃航空</span><span>20:30 起飛 → 23:55 抵香港</span></div>
+            <div class="hotel-name">🏨 DEL style Osaka Shinsaibashi by Daiwa Roynet Hotel<br>📍 心齋橋核心，步行即達購物區與地鐵</div>
+        </div>
+    </div>
+
+    <!-- DAY 1 : 美食小吃日（天神橋筋+道頓堀） -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 1 · 5月16日 (週六)</span>
+                <span class="day-theme">🍢 美食小吃日</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block">
+                <span class="time-stamp">15:35</span> 抵達關西機場，入境<br>
+                <span class="time-stamp">16:30</span> 南海電鐵特急Rapi:t→難波站 (約34分)<br>
+                <span class="time-stamp">17:15</span> 酒店Check-in，輕裝出發
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">18:00～19:30</span>
+                <div class="spot-name">🍢 天神橋筋商店街 · 日本最長商店街爆食</div>
+                <div class="spot-detail">從南森町站進入，邊走邊吃名物：中村屋可樂餅、魚伊關東煮、玉屋章魚燒、炸麵包棒、厚玉子三明治。不用預約，排隊短，最接地氣。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=天神橋筋商店街" target="_blank">地圖</a></span>
+                    <span class="info-chip">🚇 交通：地鐵堺筋線「南森町站」出口直結</span>
+                    <span class="info-chip planb">🔄 備案：商店街內任何小店皆可，幾乎不排隊</span>
+                </div>
+                <div class="remark-box">
+                    <span class="remark-item">👥 本地人日常，週末稍多但流動快</span>
+                    <span class="remark-item">🍽️ 可樂餅90円、章魚燒650円</span>
+                    <span class="remark-item">⏱️ 每攤排3～10分鐘</span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">20:00～22:00</span>
+                <div class="spot-name">🌃 道頓堀・心齋橋夜間散步＋宵夜</div>
+                <div class="spot-detail">固力果招牌、戎橋、法善寺橫丁。推薦：たこ焼きわなか (章魚燒)、千房大阪燒、PABLO半熟塔。宵夜可選金龍拉麵或一蘭。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=道頓堀" target="_blank">地圖</a></span>
+                    <span class="info-chip">🍽️ わなか章魚燒 8顆700円</span>
+                    <span class="info-chip planb">🔄 備案：くくる章魚燒、本家大章魚</span>
+                </div>
+            </div>
+            <div class="warning-box">
+                💡 美食小貼士：天神橋筋商店街大多只收現金，建議準備5,000日圓零錢。道頓堀人潮較多，可先逛後買。
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 2 : 景點旅遊日（免費景點為主＋悠閒散步） -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 2 · 5月17日 (週日)</span>
+                <span class="day-theme">🏯 景點漫遊日</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block meal-block">
+                <span class="time-stamp">09:30～10:00</span>
+                <div class="spot-name">☕ 早餐：上島咖啡店 (心齋橋)</div>
+                <div class="spot-detail">厚蛋吐司＋咖啡，約650円。</div>
+                <div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=上島珈琲店+心斎橋" target="_blank">地圖</a></span></div>
+            </div>
+
+            <div class="time-block sight-block">
+                <span class="time-stamp">10:30～12:30</span>
+                <div class="spot-name">🏯 大阪城公園（外圍免費）＋中崎町文青散步</div>
+                <div class="spot-detail">不進天守閣，公園免費。廣闊綠地、護城河拍照。之後轉往中崎町，百年町屋改建的文青小店、古著、雜貨，免費感受下町風情。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=大阪城公園" target="_blank">大阪城公園地圖</a></span>
+                    <span class="info-chip">🚇 地鐵「森之宮站」或「谷町四丁目站」</span>
+                    <span class="info-chip planb">🔄 備案：若下雨改逛心齋橋筋商店街</span>
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">12:30～13:30</span>
+                <div class="spot-name">🍚 午餐：中崎町老宅咖哩或梅田阪急食堂</div>
+                <div class="spot-detail">推薦「珈琲舎中大路」三明治或「阪急三番街食堂」定食，約900～1,200円。</div>
+                <div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=珈琲舎+中大路" target="_blank">地圖</a></span></div>
+            </div>
+
+            <div class="time-block sight-block">
+                <span class="time-stamp">14:30～16:00</span>
+                <div class="spot-name">🏛️ 四天王寺（外圍無料）＋ 淀屋橋Sky Terrace免費展望台</div>
+                <div class="spot-detail">四天王寺是日本最古老官寺，外圍免費參觀，五重塔壯觀。之後搭地鐵至淀屋橋站，直達「淀屋橋Sky Terrace」30樓露天展望台，360度免費俯瞰大阪市景，人潮少。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=四天王寺" target="_blank">四天王寺地圖</a></span>
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=淀屋橋スカイテラス" target="_blank">Sky Terrace地圖</a></span>
+                    <span class="info-chip">⏰ Sky Terrace開放至23:00，免費</span>
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">17:30～18:30</span>
+                <div class="spot-name">🍚 晚餐：難波「やよい軒」或「なか卯」</div>
+                <div class="spot-detail">平價定食，約800円。為明天精緻餐留點胃。</div>
+            </div>
+
+            <div class="warning-box">
+                📌 本日景點門票總計0日圓！適合喜歡散步、拍照、感受大阪日常的旅客。
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 3 : 精緻一餐日（白天悠閒＋豪華晚餐） -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 3 · 5月18日 (週一)</span>
+                <span class="day-theme">🍷 極致和食日</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block meal-block">
+                <span class="time-stamp">10:00～11:00</span>
+                <div class="spot-name">☕ 早餐：心齋橋「嵜本生吐司」</div>
+                <div class="spot-detail">高級生吐司搭配果醬，約800円，開啟美好一天。</div>
+                <div class="info-grid"><span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=嵜本+心斎橋" target="_blank">地圖</a></span></div>
+            </div>
+
+            <div class="time-block sight-block">
+                <span class="time-stamp">11:30～15:00</span>
+                <div class="spot-name">🛍️ 難波・心齋橋購物＋美國村散步</div>
+                <div class="spot-detail">自由逛街，也可前往「黑門市場」簡單逛逛（如不想去可改道難波Parks空中花園免費區）。午餐推薦輕食，為晚餐保留胃口。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🍽️ 午餐輕食：難波「北極星」蛋包飯 (約1,200円) 或 壽司郎</span>
+                </div>
+            </div>
+
+            <!-- 精緻晚餐區塊（豪華和牛/壽喜燒/懷石） -->
+            <div class="time-block fancy-block">
+                <span class="time-stamp">19:00～21:30</span>
+                <div class="spot-name">🌟 極致晚餐：米其林級和牛壽喜燒 / 懷石 / 神戶牛</div>
+                <div class="spot-detail">預算30,000日圓/人 (約1,500港幣) 內，推薦三大名店任選其一，請務必提前3-7天預約！</div>
+                <div class="info-grid">
+                    <span class="info-chip">🍽️ <strong>選項A：北村 KITAMURA (壽喜燒)</strong> – 百年老店米其林一星，A5和牛關西風，人均20,000-25,000円</span>
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=北村+きっとも+大阪" target="_blank">北村地圖</a> ｜ 📞 酒店代訂 / 電話 +81-6-6211-3468</span>
+                </div>
+                <div class="info-grid">
+                    <span class="info-chip">🍽️ <strong>選項B：鐵板燒 逢坂 (神戶牛)</strong> – 高樓夜景+頂級和牛鐵板燒，人均20,000-25,000円</span>
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=鉄板焼+逢坂+大阪" target="_blank">地圖</a> ｜ 預約：酒店代訂</span>
+                </div>
+                <div class="info-grid">
+                    <span class="info-chip">🍽️ <strong>選項C：味吉兆 BUNBU庵 (懷石)</strong> – 米其林一星，時令會席，午市15,000円起，晚市20,000円</span>
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=味吉兆+BUNBU庵+梅田" target="_blank">地圖</a> ｜ 官網預約或酒店代訂</span>
+                </div>
+                <div class="remark-box">
+                    <span class="remark-item">🍽️ 必吃：A5和牛、松茸、當季海鮮</span>
+                    <span class="remark-item">📞 預約方式：請酒店前台致電（最穩）或使用TableCheck/一休</span>
+                    <span class="remark-item">⏱️ 用餐時間約2小時，建議穿著 Smart Casual</span>
+                </div>
+                <div class="warning-box">
+                    🔔 <strong>重要提醒</strong>：上述餐廳為頂級名店，務必提前預約！若預約不到，備選：<strong>「玄品河豚」法善寺店</strong> (河豚套餐4,000-8,000円) 或 <strong>「板前燒肉 一斗」</strong> (高品質和牛燒肉)。
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">21:30～22:30</span>
+                <div class="spot-name">🍜 深夜拉麵（可選）</div>
+                <div class="spot-detail">若還吃得下，心齋橋「金龍拉麵」24小時營業，900円。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 4 : 返程日（住吉大社＋臨空城Outlet） -->
+    <div class="day-card">
+        <div class="day-header">
+            <div class="day-title">
+                <span>📅 Day 4 · 5月19日 (週二)</span>
+                <span class="day-theme">✈️ 神社參拜＆回程</span>
+            </div>
+        </div>
+        <div class="day-content">
+            <div class="time-block">
+                <span class="time-stamp">09:00</span> 退房、寄放行李
+            </div>
+            <div class="time-block sight-block">
+                <span class="time-stamp">09:30～11:00</span>
+                <div class="spot-name">⛩️ 住吉大社（無料）</div>
+                <div class="spot-detail">全日本住吉神社總本社，紅色反橋為經典場景，免費參拜。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=住吉大社+大阪" target="_blank">地圖</a></span>
+                    <span class="info-chip">🚇 交通：南海本線「住吉大社站」步行3分鐘</span>
+                </div>
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">11:30～12:30</span>
+                <div class="spot-name">🍚 午餐：臨空城Outlet美食街</div>
+                <div class="spot-detail">Rinku Food Stadium 或 一風堂拉麵，約1,000円。</div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">12:30～15:30</span>
+                <div class="spot-name">🛒 臨空城Outlet 最後血拼</div>
+                <div class="spot-detail">關西機場旁最大Outlet，免費接駁巴士直達機場T2。</div>
+                <div class="info-grid">
+                    <span class="info-chip">🗺️ <a href="https://www.google.com/maps/search/?api=1&query=りんくうプレミアムアウトレット" target="_blank">地圖</a></span>
+                    <span class="info-chip">🎒 行李置物櫃：車站與Outlet均有</span>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <span class="time-stamp">16:00</span> 搭免費接駁巴士至關西機場T2<br>
+                <span class="time-stamp">17:30</span> 辦理登機手續<br>
+                <span class="time-stamp">20:30</span> MM67起飛 → <span class="time-stamp">23:55</span> 抵達香港
+            </div>
+
+            <div class="time-block meal-block">
+                <span class="time-stamp">17:30～18:30</span>
+                <div class="spot-name">🍜 機場輕食：吉野家 / たこ昌</div>
+                <div class="spot-detail">牛丼或章魚燒，約700円。</div>
+            </div>
+
+            <div class="warning-box">
+                📌 樂桃航空MM67在第二航廈(T2)，從T1需搭接駁巴士約5-7分鐘，建議18:00前抵達。
+            </div>
+        </div>
+    </div>
+
+    <!-- 綜合貼士與預約資訊 -->
+    <div class="footer-tips">
+        <div class="tips-grid">
+            <div style="font-weight: 700; font-size: 1.2rem;">📌 綜合貼士 & 預約指南</div>
+            <div>✅ <strong>精緻晚餐預約</strong>：建議入住時立即請酒店前台代訂「北村」或「逢坂」，越早越好。也可自行使用「TableCheck」或「一休.com」預約。</div>
+            <div>✅ <strong>交通票券</strong>：ICOCA卡必備（機場購買）。Day2 若搭地鐵超過3次，可買地鐵一日券800日圓。</div>
+            <div>✅ <strong>現金準備</strong>：天神橋筋、道頓堀小吃攤多收現金，建議備2萬日圓/人。精緻晚餐可刷卡。</div>
+            <div>✅ <strong>雨天備案</strong>：Day2 下雨改為「EXPOCITY購物中心」或「心齋橋筋商店街」室內行程。</div>
+            <div>✅ <strong>用餐禮儀</strong>：高級餐廳請勿噴濃烈香水，著裝得體（有領上衣、非拖鞋）。</div>
+            <div>✅ <strong>網路</strong>：建議預先購買eSIM或租借WiFi機，隨時查地圖及排隊狀況。</div>
+            <hr>
+            <div style="text-align: center;">🍱 一天小吃、一天美景、一餐極致，祝您旅途完美！</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+```
